@@ -1,0 +1,48 @@
+---
+title: "mzhang25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+library(lpSolveAPI)
+mylp<-make.lp(20,9)
+
+set.column(mylp,1,c(1,0,0,20,0,0,1,0,0,1/750,1/750,1,0,0,0,0,0,0,0,0))#L1
+set.column(mylp,2,c(1,0,0,15,0,0,0,1,0,1/750,1/750,0,1,0,0,0,0,0,0,0))#M1
+set.column(mylp,3,c(1,0,0,12,0,0,0,0,1,1/750,1/750,0,0,1,0,0,0,0,0,0))#S1
+set.column(mylp,4,c(0,1,0,0,20,0,1,0,0,-1/900,0,0,0,0,1,0,0,0,0,0))#L2
+set.column(mylp,5,c(0,1,0,0,15,0,0,1,0,-1/900,0,0,0,0,0,1,0,0,0,0))#M2
+set.column(mylp,6,c(0,1,0,0,12,0,0,0,1,-1/900,0,0,0,0,0,0,1,0,0,0))#S2
+set.column(mylp,7,c(0,0,1,0,0,20,1,0,0,0,-1/450,0,0,0,0,0,0,1,0,0))#L3
+set.column(mylp,8,c(0,0,1,0,0,15,0,1,0,0,-1/450,0,0,0,0,0,0,0,1,0))#M3
+set.column(mylp,9,c(0,0,1,0,0,12,0,0,1,0,-1/450,0,0,0,0,0,0,0,0,1))#S3
+
+set.objfn(mylp, c(-420,-360,-300,-420,-360,-300,-420,-360,-300))
+set.constr.type(mylp, c("<=", "<=", "<=","<=", "<=", "<=","<=", "<=", "<=","=","=",">=",">=",">=",">=",">=",">=",">=",">=",">="))
+set.rhs(mylp, c(750,900,450,13000,12000,5000,900,1200,750,0,0,0,0,0,0,0,0,0,0,0))
+solve(mylp)
+get.objective(mylp)
+get.variables(mylp)
+get.constraints(mylp)
