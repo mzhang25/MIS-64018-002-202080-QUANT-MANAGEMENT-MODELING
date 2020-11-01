@@ -1,0 +1,75 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Question 1
+
+library(Benchmarking)
+x<-cbind(staff_hour=c(150,400,320,520,350,320),
+         supplies=c(0.2,0.7,1.2,2,1.2,0.7))
+y<-cbind(reimbursed=c(14000,14000,42000,28000,19000,14000),
+         prevately_paid=c(3500,21000,10500,42000,25000,15000))
+
+#FDH
+e.fdh <- dea(x,y,RTS = "fdh") 
+e.fdh
+
+#CRS
+e.crs <- dea(x,y,RTS = "crs") 
+e.crs
+
+#VRS
+e.vrs <- dea(x,y,RTS = "vrs") 
+e.vrs
+
+#DRS
+e.irs <- dea(x,y,RTS = "irs") 
+e.irs
+
+#IRS
+e.drs <- dea(x,y,RTS = "drs") 
+e.drs
+
+#FRH
+e.frh <- dea(x,y,RTS = "add") 
+e.frh
+
+
+# Question 2
+
+peers(e.fdh) 
+lambda(e.fdh)
+
+
+peers(e.crs) 
+lambda(e.crs)
+
+
+peers(e.vrs) 
+lambda(e.vrs)
+
+peers(e.irs) 
+lambda(e.irs)
+
+peers(e.drs) 
+lambda(e.drs)
+
+
+peers(e.frh) 
+lambda(e.frh)
+
+
+# Question 3
+Assumption	   Effective EDA unit
+FDH	           1,2,3,4,5,6
+CRS	           1,2,3,4
+VRS            1,2,3,4,5
+IRS	           1,2,3,4,5
+DRS	           1,2,3,4
+FRH	           1,2,3,4,5,6
+
+
+# Question 4
+
+In different assumptions in EDA, results are really distincted, which indicates that assumption would affect frontier in EDA obviously. Thus under different objective, assumptions should selected carefully.
