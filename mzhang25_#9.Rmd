@@ -1,0 +1,36 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Q1
+y_1^+-y_1^-=6x_1+4x_2+5x_3-50
+
+y_2^+-y_2^-=8x_1+7x_2+5x_3-75
+
+# Q2
+
+maximize Z=20x_1+15x_2+5x_3-6y_1^+-6y_1^+-3y_2^-
+
+
+
+6x_1+4x_2+5x_3-(y_1^+-y_1^-)=50$
+
+8x_1+7x_2+5x_3-(y_2^+-y_2^-)=75$
+
+x_j>=0,y_i^+>=0,y_i^->=0
+
+
+# Q3
+library(lpSolveAPI)
+mylp<-read.lp("C:/Users/Administrator/Desktop/my1.lp")
+# // Objective function               #
+# max: 20x1+15x2+5x3-6y1n-6y1p-3y2n;  #
+# // Constraints                      #
+# 6x1 + 4x2 + 5x3 + y1n - y1p = 50;   #
+# 8x1 + 7x2 + 5x3 + y2n = 75;         #
+solve(mylp)
+get.objective(mylp)
+get.variables(mylp)
+
+#x1=5,x2=5,x3=0. In this condition, y1n=0,y1p=0,y2n=0. In other words, 6x1 + 4x2 + 5x3=50, 8x1 + 7x2 + 5x3 = 75, which satisfied all demands. Under this, the objective is got 175.#
