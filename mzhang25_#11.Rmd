@@ -1,0 +1,34 @@
+---
+title: "hw10"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#x1=the number of people to shift1
+#x2=the number of people to shift2
+#x3=the number of people to shift3
+#x4=the number of people to shift4
+#x5=the number of people to shift5
+#x6=the number of people to shift6
+#x7=the number of people to shift7
+#MIn=775x1+800x2+800x3+800x4+800x5+775x6+750x7
+#workers required each day:
+#0x1+1x2+1x3+1x4+1x5+1x6+0x7>=18
+#0x1+0x2+1x3+1x4+1x5+1x6+1x7>=27
+#1x1+0x2+0x3+1x4+1x5+1x6+1x7>=22
+#1x1+1x2+0x3+0x4+1x5+1x6+1x7>=26
+#1x1+1x2+1x3+0x4+0x5+1x6+1x7>=25
+#1x1+1x2+1x3+1x4+0x5+0x6+1x7>=21
+#1x1+1x2+1x3+1x4+1x5+0x6+0x7>=19
+
+library(lpSolveAPI)
+x <- read.lp("C:/Users/Administrator/Desktop/hw.lp")
+set.type(x,1:7,type='integer')
+solve(x)
+get.objective(x)
+get.variables(x)
